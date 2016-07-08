@@ -8,6 +8,7 @@ For the initial development phase of the project we want to focus on 4 different
 ##Data Collection
 #####Create and maintain a database of financial data from stocks and other securities. Seek to describe the current and previous states of the market in a way that best facilitates the prediction of future trends and price movements.
 - Python script to get current list of traded stocks
+- Python script to get basic data from common stocks
 
 ##Signal Identification and Alerts
 #####Identify the potential movements of securities and attempt to create basic investment strategies and aid in decision making.
