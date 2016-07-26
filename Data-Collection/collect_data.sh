@@ -6,14 +6,15 @@
 # as in the --default example).
 # note: if this is set to -gt 0 the /etc/hosts part is not recognized ( may be a bug )
 
-DATABASE="testing"
-HOSTNAME="testing.cjoerkhofog8.us-west-2.rds.amazonaws.com"
-USER="testinguser"
-PASSWORD="password"
+DATABASE=""
+HOSTNAME=""
+USER=""
+PASSWORD=""
 FLATFILE=""
+SCRAPE_DATA=false
 
 
-while [[ $# -gt 1 ]]
+while [[ $# -gt 1 ]] # ??? not sure what this does, must test
 do
 key="$1"
 
@@ -21,16 +22,25 @@ key="$1"
 case $key in
     -h|--help)
     echo "DATA COLLECTION SCRIPT"
-    echo "Version 0.1.0"; echo;
+    echo "Version 0.2.0"; echo;
     echo "Arguments are as follows:"
     echo "-d|--database: Name of database to use (on AWS cluster)"
     echo "-f|--flatfile: Path to the data flat-file to use (with .csv suffix)"
     echo "-u|--user: Database username"
     echo "-p|--password: Database password"
+    echo "-D|--getdata: (no parameters) Tells the script to scrape stock data from yahoo finance"
     echo; echo;
     # shift # past argument
     ;;
     -d|--database)
+    DATABASE="$2"
+    if [ "$2" = "testing" ]; then
+      HOSTNAME="testing.cjoerkhofog8.us-west-2.rds.amazonaws.com"
+      USER="testinguser"
+    elif [ "$2" = "stockdata" ]; then
+      HOSTNAME="stockdata.cjoerkhofog8.us-west-2.rds.amazonaws.com"
+      USER="stockdatauser"
+    fi
     DATABASE="$2"
     shift # past argument
     ;;
@@ -46,6 +56,10 @@ case $key in
     PASSWORD="$2"
     shift
     ;;
+    -D|--getdata)
+    SCRAPE_DATA=true
+    shift
+    ;;
     --default)
     DEFAULT=YES
     ;;
@@ -55,9 +69,18 @@ case $key in
 esac
 shift # past argument or value
 done
+
 echo DATABASE  = "$DATABASE"
 echo USER = "$USER"
 echo PASSWORD = "$PASSWORD"
+
+if [ "$SCRAPE_DATA" = true ]; then
+  echo Getting list of all stock symbols
+  python symbol_list.py
+  echo Scraping financial data from yahoo
+  FLATFILE="$(python yahoo_data_scraper.py )"
+fi
+
 echo FLATFILE = "$FLATFILE"
 
 # setup
