@@ -44,8 +44,8 @@ def main():
     '''
     output_file = out_file_name()
     with open('symbols.txt', 'r') as syms, open(output_file, 'w') as out:
-        info = "Stock_Symbol|Current_Price|P_E_Ratio|P_B_Ratio|P_S_Ratio|50_DayMA|200_DayMA|Market_Cap|Book_Value|EBITDA|Dividend_Yield|Year_High|Year_Low|Date\n"
-        info += "INT NOT NULL AUTO_INCREMENT PRIMARY KEY|VARCHAR(8)|DECIMAL(10,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(10,2)|DECIMAL(10,2)|VARCHAR(16)|VARCHAR(16)|VARCHAR(16)|DECIMAL(6,2)|DECIMAL(10,2)|DECIMAL(10,2)|DATE()\n"
+        info = "ID|Stock_Symbol|Current_Price|P_E_Ratio|P_B_Ratio|P_S_Ratio|50_DayMA|200_DayMA|Market_Cap|Book_Value|EBITDA|Dividend_Yield|Year_High|Year_Low|Date\n"
+        info += "INT NOT NULL AUTO_INCREMENT PRIMARY KEY|VARCHAR(8)|DECIMAL(10,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(10,2)|DECIMAL(10,2)|VARCHAR(16)|VARCHAR(16)|VARCHAR(16)|DECIMAL(6,2)|DECIMAL(10,2)|DECIMAL(10,2)|DATE\n"
         for i, s in enumerate(syms):
             info += str(i) + '|' + info_string(s.strip(), Share(s)) + '\n'
         out.write(info)
