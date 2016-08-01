@@ -46,9 +46,37 @@ def main():
     with open('symbols.txt', 'r') as syms, open(output_file, 'w') as out:
         info = "ID|Stock_Symbol|Current_Price|P_E_Ratio|P_B_Ratio|P_S_Ratio|50_DayMA|200_DayMA|Market_Cap|Book_Value|EBITDA|Dividend_Yield|Year_High|Year_Low|Date\n"
         info += "INT NOT NULL AUTO_INCREMENT PRIMARY KEY|VARCHAR(8)|DECIMAL(10,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(8,2)|DECIMAL(10,2)|DECIMAL(10,2)|VARCHAR(16)|VARCHAR(16)|VARCHAR(16)|DECIMAL(6,2)|DECIMAL(10,2)|DECIMAL(10,2)|DATE\n"
+        errors = []
         for i, s in enumerate(syms):
-            info += str(i) + '|' + info_string(s.strip(), Share(s)) + '\n'
+            data = ""
+            if i % 50 == 0:
+                print i, 'symbols processed'
+            try:
+                data = info_string(s.strip(), Share(s.strip()))
+            except:
+                print "There was an exception in iteration: ", i, ", symbol: ", s.strip()
+                errors.append((i, s.strip()))
+                data = "|||||||||||||"
+            info += str(i) + '|' + data + '\n'
+        while len(errors) > 0:
+            print "retrying errors"
+            errors2 = []
+            for e in errors:
+                data = ''
+                i = e[0]
+                s = e[1]
+                try:
+                    data = info_string(s.strip(), Share(s.strip()))
+                    info = info.replace('\n' + str(i) + '||||||||||||||', '\n' + str(i) + '|' + data)
+                    print i, 'replaced'
+                except:
+                    print "There was an exception in iteration: ", i, ", symbol: ", s.strip()
+                    errors2.append((i, s))
+                    print 'there was another error'
+            errors = errors2
+
         out.write(info)
+
     print output_file
 
 

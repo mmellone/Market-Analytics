@@ -78,7 +78,8 @@ if [ "$SCRAPE_DATA" = true ]; then
   echo Getting list of all stock symbols
   python symbol_list.py
   echo Scraping financial data from yahoo
-  FLATFILE="$(python yahoo_data_scraper.py )"
+  python yahoo_data_scraper.py
+  FLATFILE="31_7_2016_stockdata.csv"
 fi
 
 echo FLATFILE = "$FLATFILE"
