@@ -2,7 +2,7 @@ import sys
 import MySQLdb as sql
 
 def main():
-    ''' Creates an sql table for a csv file to be placed into
+    ''' Places 
         arg1 = hostname of database
         arg2 = username
         arg3 = password for user

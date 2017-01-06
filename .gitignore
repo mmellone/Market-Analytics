@@ -1,2 +1,4 @@
 Data-Collection/*.txt
 Data-Collection/*.csv
+Data-Collection/*.pyc
+Data-Collection/flatfiles

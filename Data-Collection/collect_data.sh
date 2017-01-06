@@ -13,35 +13,33 @@ PASSWORD=""
 FLATFILE=""
 SCRAPE_DATA=false
 
-
-while [[ $# -gt 1 ]] # ??? not sure what this does, must test
+while [[ $# -gt 0 ]] # ??? not sure what this does, must test
 do
 key="$1"
-
 
 case $key in
     -h|--help)
     echo "DATA COLLECTION SCRIPT"
     echo "Version 0.2.0"; echo;
     echo "Arguments are as follows:"
-    echo "-d|--database: Name of database to use (on AWS cluster)"
+    echo "-d|--database: Name of database to use"
     echo "-f|--flatfile: Path to the data flat-file to use (with .csv suffix)"
     echo "-u|--user: Database username"
     echo "-p|--password: Database password"
     echo "-D|--getdata: (no parameters) Tells the script to scrape stock data from yahoo finance"
     echo; echo;
-    # shift # past argument
+    exit
     ;;
     -d|--database)
     DATABASE="$2"
     if [ "$2" = "testing" ]; then
-      HOSTNAME="testing.cjoerkhofog8.us-west-2.rds.amazonaws.com"
-      USER="testinguser"
+      # HOSTNAME="testing.cjoerkhofog8.us-west-2.rds.amazonaws.com"
+      # USER="testinguser"
+      HOSTNAME="localhost"
     elif [ "$2" = "stockdata" ]; then
-      HOSTNAME="stockdata.cjoerkhofog8.us-west-2.rds.amazonaws.com"
-      USER="stockdatauser"
+      HOSTNAME="localhost"
     fi
-    DATABASE="$2"
+    # DATABASE="$2"
     shift # past argument
     ;;
     -f|--flatfile)
@@ -58,7 +56,7 @@ case $key in
     ;;
     -D|--getdata)
     SCRAPE_DATA=true
-    shift
+    # shift
     ;;
     --default)
     DEFAULT=YES
@@ -66,26 +64,34 @@ case $key in
     *)
             # unknown option
     ;;
+
 esac
+
 shift # past argument or value
 done
 
-echo DATABASE  = "$DATABASE"
+echo HOSTNAME = "$HOSTNAME"
 echo USER = "$USER"
 echo PASSWORD = "$PASSWORD"
-
+echo DATABASE  = "$DATABASE"
 if [ "$SCRAPE_DATA" = true ]; then
   echo Getting list of all stock symbols
   python symbol_list.py
   echo Scraping financial data from yahoo
   python yahoo_data_scraper.py
-  FLATFILE="31_7_2016_stockdata.csv"
+  FLATFILE="$(python flat_file_name.py)"
 fi
 
 echo FLATFILE = "$FLATFILE"
 
-# setup
-python setup_db.py $HOSTNAME $USER $PASSWORD $DATABASE $FLATFILE
+# Place flatfile into "flatfiles" directory
+echo Copying flatfile into working directory
+cp flatfiles/$FLATFILE dailystockdata.csv
 
-# This imports a csv file into aws rds
-mysqlimport --local --compress --user=$USER --password=$PASSWORD --host=$HOSTNAME --fields-terminated-by='|' --ignore-lines=2 $DATABASE $FLATFILE
+echo Loading flatfile into sql table
+mysql -u root --password=$PASSWORD < load_data.sql
+
+echo Cleaning up
+rm dailystockdata.csv
+
+echo Finished
