@@ -19,7 +19,7 @@ def get_symbols(name):
     # Open a connection to the nasdaqtrader ftp server
     ftp = ftplib.FTP('ftp.nasdaqtrader.com', 'anonymous', 'user@domain.com')
     ftp.cwd('SymbolDirectory')
-    ftp.retrbinary('RETR nasdaqlisted.txt', output_file.write)
+    ftp.retrbinary('RETR nasdaqtraded.txt', output_file.write)
     ftp.close()
     output_file.close()
 
@@ -40,9 +40,8 @@ def main():
 
     # Add every common stock into the new common_stock_symbols file
     for line in raw_syms:
-        parsed = line.split('|')
-        if parsed[1][-12:] == 'Common Stock':
-            out_string += parsed[0] + '\n'
+        if line.find('Common Stock') != -1:
+            out_string += line.split('|')[1] + '\n'
     raw_syms.close()
     common_stock_syms.write(out_string)
     common_stock_syms.close()
