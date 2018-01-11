@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/commons-net-3.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/YahooFinanceAPI-3.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/YahooFinanceAPI-3.8.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
