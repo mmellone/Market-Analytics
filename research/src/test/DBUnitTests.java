@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class DBUnitTests {
 
     @Test
-    public void testSymbolsConnection() {
+    void testSymbolsConnection() {
         DBInstance db = DBInstance.STOCKDATA;
     }
 }

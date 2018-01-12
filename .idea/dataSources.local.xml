@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="stockdata@localhost" uuid="667f8b77-e2a2-40b1-a8fd-9035d8ce1bcc">
+    <data-source name="stockdata@localhost" uuid="f407bba4-455e-4c7d-990f-866a9a97cd08">
       <database-info product="MySQL" version="5.7.20-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -9,7 +9,7 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:*</introspection-schemas>
+      <introspection-schemas>*:stockdata</introspection-schemas>
     </data-source>
   </component>
 </project>

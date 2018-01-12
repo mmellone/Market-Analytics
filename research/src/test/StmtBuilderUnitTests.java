@@ -32,7 +32,7 @@ class StmtBuilderUnitTests {
     void testSelectStmtBuilderSimilarCond() {
         SelectStmtBuilder ssb = new SelectStmtBuilder("table_name");
         ssb.addColumn("col1");
-        ssb.addSimilarCondition("'cond col'", "sub");
-        assertEquals("SELECT col1 FROM table_name WHERE 'cond col' like '%sub%';", ssb.getStatement());
+        ssb.addSimilarCondition("`cond col`", "sub");
+        assertEquals("SELECT col1 FROM table_name WHERE `cond col` like '%sub%';", ssb.getStatement());
     }
 }

@@ -34,10 +34,11 @@ public class SelectStmtBuilder implements StmtBuilder {
     /**
      * Adds a check for similarity of the substring in the column
      *
-     * @param column The name of the column to use (surrounded by '' if it contains a space)
+     * @param column The name of the column to use (surrounded by `` if it contains a space)
      * @param substring The substring to match
      */
     public void addSimilarCondition(String column, String substring) {
+        // todo add `` automatically
         conditions.add(column + " like '%" + substring + "%'");
     }
 

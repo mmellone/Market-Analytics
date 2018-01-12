@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="libs1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/commons-net-3.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/YahooFinanceAPI-3.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/YahooFinanceAPI-3.8.0-javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

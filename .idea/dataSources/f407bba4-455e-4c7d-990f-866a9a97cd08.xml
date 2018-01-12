@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="stockdata@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="stockdata">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="SYMBOLS"/>
+    <table id="8" parent="2" name="compiled_data"/>
+    <column id="9" parent="7" name="Nasdaq Traded">
+      <Position>1</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="10" parent="7" name="Symbol">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="11" parent="7" name="Security Name">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="12" parent="7" name="Listing Exchange">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="13" parent="7" name="Market Category">
+      <Position>5</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="14" parent="7" name="ETF">
+      <Position>6</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="15" parent="7" name="Round Lot Size">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="16" parent="7" name="Test Issue">
+      <Position>8</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="17" parent="7" name="Financial Status">
+      <Position>9</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="18" parent="7" name="CQS Symbol">
+      <Position>10</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="19" parent="7" name="NASDAQ Symbol">
+      <Position>11</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="20" parent="7" name="NextShares">
+      <Position>12</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="21" parent="8" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="22" parent="8" name="Stock_Symbol">
+      <Position>2</Position>
+      <DataType>varchar(8)|0</DataType>
+    </column>
+    <column id="23" parent="8" name="Current_Price">
+      <Position>3</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="24" parent="8" name="PE_Ratio">
+      <Position>4</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="25" parent="8" name="PB_Ratio">
+      <Position>5</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="26" parent="8" name="PS_Ratio">
+      <Position>6</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="27" parent="8" name="50_DayMA">
+      <Position>7</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="28" parent="8" name="200_DayMA">
+      <Position>8</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="29" parent="8" name="Market_Cap">
+      <Position>9</Position>
+      <DataType>decimal(20,2)|0</DataType>
+    </column>
+    <column id="30" parent="8" name="Book_Value">
+      <Position>10</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="31" parent="8" name="EBITDA">
+      <Position>11</Position>
+      <DataType>decimal(20,2)|0</DataType>
+    </column>
+    <column id="32" parent="8" name="Dividend_Yield">
+      <Position>12</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="33" parent="8" name="Year_High">
+      <Position>13</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="34" parent="8" name="Year_Low">
+      <Position>14</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <column id="35" parent="8" name="Datestamp">
+      <Position>15</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <index id="36" parent="8" name="dateIndex">
+      <ColNames>Datestamp</ColNames>
+    </index>
+    <index id="37" parent="8" name="symIndex">
+      <ColNames>Stock_Symbol</ColNames>
+    </index>
+    <key id="38" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

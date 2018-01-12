@@ -10,7 +10,7 @@ import java.sql.Statement;
  * Created by mitchell on 7/20/17.
  */
 public enum DBInstance {
-    STOCKDATA(Hostnames.STOCKDATA);
+    STOCKDATA(Hostnames.STOCKDATA, "stockdata");
 
     private enum Hostnames {
         STOCKDATA("jdbc:mysql://localhost:3306/stockdata");
@@ -31,14 +31,15 @@ public enum DBInstance {
 
     private Connection m_connection;
 
-    DBInstance(Hostnames hostname) {
-        this(hostname, DEFAULT_USERNAME, DEFAULT_PASSWORD);
+    DBInstance(Hostnames hostname, String dbName) {
+        this(hostname, dbName, DEFAULT_USERNAME, DEFAULT_PASSWORD);
     }
 
-    DBInstance(Hostnames hostname, String username, String password) throws IllegalStateException {
+    DBInstance(Hostnames hostname, String dbName, String username, String password) throws IllegalStateException {
         try {
             Class.forName(JDBC_DRIVER_CLASS);
             m_connection = DriverManager.getConnection(hostname.getHostname(), username, password);
+            executeQuery("USE " + dbName + ";");
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect to the database!", e);
         } catch (ClassNotFoundException e) {
